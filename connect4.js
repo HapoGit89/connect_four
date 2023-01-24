@@ -11,12 +11,8 @@ const HEIGHT = 6;
 let currPlayer = 1; // active player: 1 or 2
 const board = []; // array of rows, each row is array of cells  (board[y][x])
 
-/** makeBoard: create in-JS board structure:
- *    board = array of rows, each row is array of cells  (board[y][x])
- */
 
 function makeBoard() {
-  // TODO: set "board" to empty HEIGHT x WIDTH matrix array
   for (let y = 0; y < HEIGHT; y++){
     board.push([])
     for (let x = 0; x < WIDTH; x++ ){
@@ -26,13 +22,12 @@ function makeBoard() {
 
 }
 
-/** makeHtmlBoard: make HTML table and row of column tops. */
+
 
 function makeHtmlBoard() {
-  // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
 const htmlBoard = document.getElementById('board');
 
-  // TODO: add comment for this code
+ 
   const top = document.createElement("tr"); //creates table row HTML element
   top.setAttribute("id", "column-top");  // sets class for that row
   top.addEventListener("click", handleClick); // adds event listener for that row and adds handleclick as callback
@@ -44,7 +39,7 @@ const htmlBoard = document.getElementById('board');
   }
   htmlBoard.append(top); // appends the whole top row which data cells to the html structure
 
-  // TODO: add comment for this code
+
   for (let y = 0; y < HEIGHT; y++) {   // creates as many rows as the board has HEIGHT
     const row = document.createElement("tr");
     for (let x = 0; x < WIDTH; x++) {
@@ -67,6 +62,10 @@ function findSpotForCol(x) {
 
 function placeInTable(y, x) {
   // TODO: make a div and insert into correct table cell
+  const piece = document.createElement('div');
+  const place = document.getElementById(`${x}-${y}`)
+  piece.classList.add("piece");
+  place.appendChild(piece);
 }
 
 /** endGame: announce game end */
