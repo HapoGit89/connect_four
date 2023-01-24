@@ -127,14 +127,14 @@ function checkForWin() {
 
   // TODO: read and understand this code. Add comments to help you.
 
-  for (var y = 0; y < HEIGHT; y++) {
-    for (var x = 0; x < WIDTH; x++) {
-      var horiz = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]];
-      var vert = [[y, x], [y + 1, x], [y + 2, x], [y + 3, x]];
-      var diagDR = [[y, x], [y + 1, x + 1], [y + 2, x + 2], [y + 3, x + 3]];
-      var diagDL = [[y, x], [y + 1, x - 1], [y + 2, x - 2], [y + 3, x - 3]];
+  for (let y = 0; y < HEIGHT; y++) { // for every column
+    for (let x = 0; x < WIDTH; x++) { // for every row
+      let horiz = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]]; // this defines a dynamic horizontal row of 4 cells (first one would be the first 4 cells to the left, than x skips and its the 4 cells from teh second cell on. This is done for every row)
+      let vert = [[y, x], [y + 1, x], [y + 2, x], [y + 3, x]]; // this defines a dynamic vertical row of 4 cells
+      let diagDR = [[y, x], [y + 1, x + 1], [y + 2, x + 2], [y + 3, x + 3]]; // this defines a dynamic to the right diagonal row of 4 cells
+      let diagDL = [[y, x], [y + 1, x - 1], [y + 2, x - 2], [y + 3, x - 3]]; // this defines a dynamic to the left diagonal row of 4 cells
 
-      if (_win(horiz) || _win(vert) || _win(diagDR) || _win(diagDL)) {
+      if (_win(horiz) || _win(vert) || _win(diagDR) || _win(diagDL)) {  // checks if any of the 4 cell combinations is filled by one player
         return true;
       }
     }
