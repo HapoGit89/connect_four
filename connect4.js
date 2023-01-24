@@ -54,32 +54,37 @@ const htmlBoard = document.getElementById('board');
 /** findSpotForCol: given column x, return top empty y (null if filled) */
 
 function findSpotForCol(x) {
-  // TODO: write the real version of this, rather than always returning 0
-  return 0;
+for (let i = 5; i>=0; i--){
+  if (board[i][x] === "" ){
+    return i}
+}
+  
+  return null;
 }
 
-/** placeInTable: update DOM to place piece into HTML table of board */
 
-function placeInTable(y, x) {
+
+function placeInTable(x, y) {
   // TODO: make a div and insert into correct table cell
   const piece = document.createElement('div');
   const place = document.getElementById(`${x}-${y}`)
-  piece.classList.add("piece");
+  piece.classList.add(`piece${currPlayer}`);
   place.appendChild(piece);
+  board[x][y] = currPlayer;
 }
 
 /** endGame: announce game end */
 
 function endGame(msg) {
-  // TODO: pop up alert message
+  window.alert(msg);
 }
 
 /** handleClick: handle click of column top to play piece */
 
 function handleClick(evt) {
+  
   // get x from ID of clicked cell
-  var x = +evt.target.id;
-
+  const x = +evt.target.id;
   // get next spot in column (if none, ignore click)
   var y = findSpotForCol(x);
   if (y === null) {
@@ -95,11 +100,11 @@ function handleClick(evt) {
     return endGame(`Player ${currPlayer} won!`);
   }
 
-  // check for tie
-  // TODO: check if all cells in board are filled; if so call, call endGame
 
-  // switch players
-  // TODO: switch currPlayer 1 <-> 2
+  if(checkTie(board)){endGame("It is a tie!")}
+  
+
+  currPlayer === 1? currPlayer = 2 : currPlayer = 1;
 }
 
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
@@ -135,6 +140,8 @@ function checkForWin() {
     }
   }
 }
+
+function checkTie(arr){ return arr.every((y)=> (y.every((x)=> x.length>0)))}
 
 makeBoard();
 makeHtmlBoard();
